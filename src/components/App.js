@@ -24,13 +24,18 @@ function App() {
     setQuiz([...quiz, newForm]);
   };
 
+
+
   return (
     <main>
       <AdminNavBar onChangePage={setPage} />
       {page === "Form" ? (
         <QuestionForm onAddNewQuestion={onAddNewQuestion} />
       ) : (
-        <QuestionList quiz={quiz} setQuiz={setQuiz} />
+        <QuestionList
+          quiz={quiz}
+          setQuiz={setQuiz}
+        />
       )}
     </main>
   );

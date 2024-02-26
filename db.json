@@ -9,7 +9,8 @@
         "key",
         "prop"
       ],
-      "correctIndex": 2
+      "correctIndex": "2",
+      "newCorrectIndex": 3
     },
     {
       "id": 2,
