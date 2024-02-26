@@ -13,30 +13,31 @@ function QuestionList({ quiz, setQuiz }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ correctIndex: `${newCorrectIndex}` }),
+      body: JSON.stringify({ correctIndex: newCorrectIndex }),
     })
       .then((r) => {
-        if (r.ok) {
-          setQuiz((prevQuiz) =>
-            prevQuiz.map((question) => question.id === id)
-              ? { ...quiz, newCorrectIndex }
-              : quiz
-          );
+        if (!r.ok) {
+          alert("failed");
+          return;
         } else {
-          alert("Failed");
+          return r.json().then((newUpdatedQuestionObj) => {
+            setQuiz(
+              quiz.map((question) =>
+                question.id === id ? newUpdatedQuestionObj : question
+              )
+            );
+          });
         }
       })
       .catch((error) => console.log(error));
   };
 
-  const mappedQuiz = quiz.map((question) => (
+  const mappedQuiz = quiz?.map((question) => (
     <QuestionItem
       key={question.id}
       question={question}
-      setQuiz={setQuiz}
       onDeleteQuestion={onDeleteQuestion}
-      quiz={quiz}
-      onAnswerChange={onCorrectIndexChange}
+      onCorrectIndexChange={onCorrectIndexChange}
     />
   ));
 

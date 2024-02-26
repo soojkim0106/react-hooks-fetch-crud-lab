@@ -1,12 +1,4 @@
-import { useState } from "react";
-
-function QuestionItem({
-  question,
-  setQuiz,
-  onDeleteQuestion,
-  quiz,
-  onAnswerChange,
-}) {
+function QuestionItem({ question, onDeleteQuestion, onCorrectIndexChange }) {
   const { id, prompt, answers, correctIndex } = question;
 
   const options = answers.map((answer, index) => (
@@ -25,7 +17,7 @@ function QuestionItem({
 
   const handleChange = (event) => {
     const newCorrectIndex = parseInt(event.target.value);
-    onAnswerChange(id, newCorrectIndex);
+    onCorrectIndexChange(id, newCorrectIndex);
   };
 
   return (
